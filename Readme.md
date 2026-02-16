@@ -28,10 +28,11 @@ Yeison David Moreno Nieto, Kevin Santiago Larrota, Juan David Cuadros.
 
 # Requisitos Funcionales del Cliente
 
-Registrarse.
 Iniciar sesión.
 Agendar cita.
 Cancelar cita.
+
+
 
 
 
