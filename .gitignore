@@ -1,0 +1,68 @@
+# ===============================
+# Django
+# ===============================
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+db.sqlite3-journal
+media/
+
+# ===============================
+# Entornos virtuales
+# ===============================
+venv/
+env/
+ENV/
+.venv/
+
+# ===============================
+# Variables de entorno
+# ===============================
+.env
+.env.*
+*.env
+
+# ===============================
+# Archivos de IDE / Editor
+# ===============================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ===============================
+# Sistema Operativo
+# ===============================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===============================
+# Archivos de pruebas / cobertura
+# ===============================
+htmlcov/
+.coverage
+.coverage.*
+.tox/
+.pytest_cache/
+
+# ===============================
+# Migraciones compiladas
+# (NO borra las migraciones .py)
+# ===============================
+**/migrations/__pycache__/
+
+# ===============================
+# Archivos de configuración sensibles
+# ===============================
+settings_local.py
+local_settings.py
+
+# ===============================
+# Archivos temporales
+# ===============================
+*.tmp
+*.swp
+*.bak
