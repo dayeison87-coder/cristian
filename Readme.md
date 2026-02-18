@@ -52,6 +52,7 @@ Firebase Hosting
 ## Backend
 - Firebase Authenticat
 - Firebase Hosting
+<img width="744" height="855" alt="image" src="https://github.com/user-attachments/assets/a9dbb415-e5c1-45bb-b299-883a15a3d4c1" />
 
 ---
 
