@@ -1,6 +1,6 @@
-# 💈 Sistema Web de Gestión para Barbería
+#  Sistema Web de Gestión para Barbería
 
-## 📌 Descripción
+##  Descripción
 
 Sistema web desarrollado para la gestión integral de una barbería.  
 Permite administrar clientes, citas, servicios y usuarios mediante una arquitectura basada en Backend as a Service (BaaS) utilizando Firebase.
@@ -13,7 +13,7 @@ El sistema está compuesto por:
 
 ---
 
-# 🎯 Objetivos
+#  Objetivos
 
 ## Objetivo General
 
@@ -28,7 +28,7 @@ Desarrollar una plataforma web segura y escalable que permita la gestión digita
 
 ---
 
-# 🏗 Arquitectura del Sistema
+#  Arquitectura del Sistema
 
 El sistema utiliza una arquitectura Cliente-Servidor basada en servicios en la nube.
 
@@ -42,7 +42,7 @@ Firebase Hosting
 
 ---
 
-# 🛠 Tecnologías Utilizadas
+#  Tecnologías Utilizadas
 
 ## Frontend
 - HTML
@@ -55,7 +55,7 @@ Firebase Hosting
 
 ---
 
-# 📂 Estructura del Proyecto
+#  Estructura del Proyecto
 
 ```
 /clase-1
@@ -102,9 +102,9 @@ Firebase Hosting
 ```
 ---
 
-# 📌 Descripción de la Estructura
+#  Descripción de la Estructura
 
-## 📁 clase1/
+##  clase1/
 Contiene la configuración principal del proyecto Django.
 
 - `settings.py` → Configuración general del proyecto (base de datos, apps instaladas, seguridad).
@@ -115,7 +115,7 @@ Contiene la configuración principal del proyecto Django.
 
 ---
 
-## 📁 usuarios/
+##  usuarios/
 Aplicación encargada de la gestión de usuarios y funcionalidades relacionadas con autenticación y citas.
 
 - `models.py` → Define la estructura de la base de datos.
@@ -129,7 +129,7 @@ Aplicación encargada de la gestión de usuarios y funcionalidades relacionadas 
 
 ---
 
-## 📁 templates/citas/
+##  templates/citas/
 Contiene las vistas del sistema en formato HTML.
 
 - `crear.html` → Formulario para crear citas.
@@ -140,32 +140,32 @@ Contiene las vistas del sistema en formato HTML.
 
 ---
 
-## 📁 firebase/
+##  firebase/
 Configuración e integración con Firebase para autenticación o servicios en la nube.
 
 ---
 
-## 📁 agende/
+##  agende/
 Módulo relacionado con la gestión de agendas o programación.
 
 ---
 
-## 📁 agentes/
+##  agentes/
 Módulo relacionado con gestión de personal o usuarios internos.
 
 ---
 
-## 📁 workflows/
+##  workflows/
 Contiene la lógica de procesos o flujos internos del sistema.
 
 ---
 
-## 📁 venv/
+##  venv/
 Entorno virtual de Python que contiene las dependencias del proyecto.
 
 ---
 
-## 📄 Archivos principales
+##  Archivos principales
 
 - `.env` → Variables de entorno (claves privadas).
 - `.gitignore` → Archivos ignorados por Git.
@@ -174,59 +174,11 @@ Entorno virtual de Python que contiene las dependencias del proyecto.
 - `README.md` → Documentación del proyecto.
 ---
 
-# 🗄 Modelo de Base de Datos
-
-## Colección: usuarios
-
-| Campo  | Tipo   | Descripción |
-|--------|--------|------------|
-| id     | string | ID automático |
-| nombre | string | Nombre completo |
-| email  | string | Correo electrónico |
-| rol    | string | admin / barbero |
-
+# Autores
+Juan David Cuadros Yeison David Moreno , Kevin Santiago Larrota, harold olivera.
 ---
 
-## Colección: clientes
-
-| Campo         | Tipo      |
-|--------------|----------|
-| id           | string   |
-| nombre       | string   |
-| telefono     | string   |
-| ultima_visita| timestamp|
-
----
-
-## Colección: citas
-
-| Campo       | Tipo      |
-|------------|----------|
-| id         | string   |
-| cliente_id | reference|
-| fecha      | timestamp|
-| servicio   | string   |
-| estado     | string   |
-
-Estados posibles:
-- pendiente
-- completada
-- cancelada
-
----
-
-## Colección: servicios
-
-| Campo    | Tipo   |
-|----------|--------|
-| id       | string |
-| nombre   | string |
-| precio   | number |
-| duracion | number |
-
----
-
-# 🔐 Seguridad
+#  Seguridad
 
 - Autenticación mediante email y contraseña.
 - Reglas de seguridad en Firestore.
@@ -235,7 +187,7 @@ Estados posibles:
 
 ---
 
-# ⚙ Funcionalidades Principales
+#  Funcionalidades Principales
 
 - Registro de usuarios
 - Inicio de sesión
@@ -246,7 +198,7 @@ Estados posibles:
 
 ---
 
-# 📋 Requisitos
+#  Requisitos
 
 ## Funcionales
 - Registro y login funcional.
@@ -262,5 +214,5 @@ Estados posibles:
 
 ---
 
-# 🚀 Instalación y Configuración
+
 
