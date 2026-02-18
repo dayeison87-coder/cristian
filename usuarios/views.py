@@ -118,7 +118,7 @@ def dashboard(request):
 
 
 # ==================================================
-# LISTAR CITAS
+# LISTAR CITAS (solo pendientes)
 # ==================================================
 @login_required_firebase
 def listar_citas(request):
@@ -126,15 +126,22 @@ def listar_citas(request):
     citas = []
 
     try:
-        docs = db.collection('citas').where('uid_cliente', '==', uid).stream()
+        # Traer solo citas que estén pendientes
+        docs = db.collection('citas') \
+                 .where('uid_cliente', '==', uid) \
+                 .where('estado', '==', 'pendiente') \
+                 .stream()
+
         for doc in docs:
             cita = doc.to_dict()
             cita['id'] = doc.id
             citas.append(cita)
+
     except Exception as e:
         messages.error(request, f"Error al cargar citas: {str(e)}")
 
     return render(request, 'citas/listar.html', {'citas': citas})
+
 
 
 # ==================================================
@@ -173,11 +180,10 @@ def crear_cita(request):
 @login_required_firebase
 def cancelar_cita(request, cita_id):
     try:
-        db.collection('citas').document(cita_id).update({
-            'estado': 'cancelada'
-        })
-        messages.success(request, "Cita cancelada.")
+        #borramos la cita.
+        db.collection('citas').document(cita_id).delete()
+        messages.success(request, "Cita cancelada correctamente 💈")
     except Exception as e:
-        messages.error(request, f"Error: {str(e)}")
-
+        messages.error(request, f"Error al cancelar cita: {str(e)}")
     return redirect('listar_citas')
+
