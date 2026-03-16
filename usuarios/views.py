@@ -156,3 +156,26 @@ def citas(request):
 
     return JsonResponse({"error": "Método no permitido"}, status=405)
 
+# ==========================================
+# EDITAR CITA
+# ==========================================
+@csrf_exempt
+@firebase_token_required
+def editar_cita(request, cita_id):
+
+    if request.method != "PUT":
+        return JsonResponse({"error": "Método no permitido"}, status=405)
+
+    data = json.loads(request.body)
+
+    db.collection("citas").document(cita_id).update({
+        "titulo": data.get("titulo"),
+        "descripcion": data.get("descripcion"),
+        "estado": data.get("estado")
+    })
+
+    return JsonResponse({
+        "mensaje": "Cita actualizada correctamente"
+    })
+
+
