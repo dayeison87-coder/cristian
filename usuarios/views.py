@@ -86,3 +86,27 @@ def login_api(request):
     password = data.get("password")
 
     api_key = os.getenv("FIREBASE_API_KEY")
+
+    url = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={api_key}"
+
+    payload = {
+        "email": email,
+        "password": password,
+        "returnSecureToken": True
+    }
+
+    response = requests.post(url, json=payload)
+    data = response.json()
+
+    if response.status_code == 200:
+
+        return JsonResponse({
+            "token": data["idToken"],
+            "uid": data["localId"],
+            "email": data["email"]
+        })
+
+    return JsonResponse({
+        "error": "Correo o contraseña incorrectos"
+    }, status=401)
+
