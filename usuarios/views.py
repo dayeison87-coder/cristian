@@ -11,3 +11,29 @@ import os
 initialize_firebase()
 db = firestore.client()
 #cambio
+
+# ==========================================
+# DECORADOR PARA VALIDAR TOKEN FIREBASE
+# ==========================================
+def firebase_token_required(view_func):
+
+    @wraps(view_func)
+    def wrapper(request, *args, **kwargs):
+
+        auth_header = request.headers.get("Authorization")
+
+        if not auth_header:
+            return JsonResponse({"error": "Token requerido"}, status=401)
+
+        try:
+            token = auth_header.split("Bearer ")[1]
+            decoded_token = auth.verify_id_token(token)
+
+            request.uid = decoded_token["uid"]
+
+        except Exception:
+            return JsonResponse({"error": "Token inválido"}, status=401)
+
+        return view_func(request, *args, **kwargs)
+
+    return wrapper
