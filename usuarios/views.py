@@ -37,3 +37,22 @@ def firebase_token_required(view_func):
         return view_func(request, *args, **kwargs)
 
     return wrapper
+# ==========================================
+# REGISTRO
+# ==========================================
+@csrf_exempt
+def registro_usuario(request):
+
+    if request.method != "POST":
+        return JsonResponse({"error": "Método no permitido"}, status=405)
+
+    data = json.loads(request.body)
+
+    email = data.get("email")
+    password = data.get("password")
+
+    try:
+        user = auth.create_user(
+            email=email,
+            password=password
+        )
