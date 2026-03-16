@@ -10,3 +10,4 @@ import os
 # Inicializar Firebase
 initialize_firebase()
 db = firestore.client()
+#cambio
