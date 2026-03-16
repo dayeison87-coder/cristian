@@ -70,3 +70,19 @@ def registro_usuario(request):
 
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
+
+# ==========================================
+# LOGIN
+# ==========================================
+@csrf_exempt
+def login_api(request):
+
+    if request.method != "POST":
+        return JsonResponse({"error": "Método no permitido"}, status=405)
+
+    data = json.loads(request.body)
+
+    email = data.get("email")
+    password = data.get("password")
+
+    api_key = os.getenv("FIREBASE_API_KEY")
