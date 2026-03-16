@@ -110,3 +110,26 @@ def login_api(request):
         "error": "Correo o contraseña incorrectos"
     }, status=401)
 
+# ==========================================
+# CITAS (GET Y POST)
+# ==========================================
+@csrf_exempt
+@firebase_token_required
+def citas(request):
+
+    # ----------- VER CITAS -----------
+    if request.method == "GET":
+
+        citas = []
+
+        docs = db.collection("citas") \
+            .where("uid_cliente", "==", request.uid) \
+            .stream()
+
+        for doc in docs:
+            cita = doc.to_dict()
+            cita["id"] = doc.id
+            citas.append(cita)
+
+        return JsonResponse(citas, safe=False)
+
