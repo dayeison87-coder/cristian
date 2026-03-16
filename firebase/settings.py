@@ -116,3 +116,28 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# =========================
+# DJANGO REST FRAMEWORK
+# =========================
+REST_FRAMEWORK = {
+    # 🔹 Usas Firebase directamente en las views
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+
+# =========================
+# DRF SPECTACULAR (SWAGGER)
+# =========================
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'API de citas',
+    'DESCRIPTION': 'API para gestión de citas con Firebase Authentication y roles',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
+
+
+# =========================
+# DEFAULT PRIMARY KEY
+# =========================
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
