@@ -132,4 +132,27 @@ def citas(request):
             citas.append(cita)
 
         return JsonResponse(citas, safe=False)
+    
+     # ----------- CREAR CITA -----------
+    elif request.method == "POST":
+
+        data = json.loads(request.body)
+
+        titulo = data.get("titulo")
+        descripcion = data.get("descripcion")
+
+        cita_ref = db.collection("citas").add({
+            "uid_cliente": request.uid,
+            "titulo": titulo,
+            "descripcion": descripcion,
+            "estado": "pendiente",
+            "fecha_creacion": firestore.SERVER_TIMESTAMP
+        })
+
+        return JsonResponse({
+            "mensaje": "Cita creada correctamente",
+            "id": cita_ref[1].id
+        })
+
+    return JsonResponse({"error": "Método no permitido"}, status=405)
 
