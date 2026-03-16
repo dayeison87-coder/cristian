@@ -56,3 +56,17 @@ def registro_usuario(request):
             email=email,
             password=password
         )
+
+        db.collection("usuarios").document(user.uid).set({
+            "email": email,
+            "uid": user.uid,
+            "fecha_registro": firestore.SERVER_TIMESTAMP
+        })
+
+        return JsonResponse({
+            "mensaje": "Usuario creado correctamente",
+            "uid": user.uid
+        })
+
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
