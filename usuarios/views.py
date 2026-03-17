@@ -70,3 +70,17 @@ def registro_usuario(request):
 
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
+
+
+# ==========================================
+# ELIMINAR CITA
+# ==========================================
+@csrf_exempt
+@firebase_token_required
+def eliminar_cita(request, cita_id):
+    if request.method != "DELETE":
+        return JsonResponse({"error": "Método no permitido"}, status=405)
+
+    db.collection("citas").document(cita_id).delete()
+
+    return JsonResponse({"mensaje": "Cita eliminada correctamente"})
