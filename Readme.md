@@ -7,7 +7,7 @@ Permite administrar clientes, citas, servicios y usuarios mediante una arquitect
 
 El sistema está compuesto por:
 
-- Frontend: HTML, CSS y JavaScript
+- Frontend: HTML, CSS
 - Backend: Firebase Authentication 
 - Hosting en la nube con Firebase Hosting
 
