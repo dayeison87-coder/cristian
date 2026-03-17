@@ -47,7 +47,6 @@ Firebase Hosting
 ## Frontend
 - HTML
 - CSS
-- JavaScript 
 
 ## Backend
 - Firebase Authenticat
