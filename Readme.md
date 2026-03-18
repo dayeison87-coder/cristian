@@ -228,3 +228,4 @@ Texto de ejemplo: se añadieron cambios menores para commit extra.
 \n* (cuadros) commit no funcional 2
 \n* (cuadros) commit no funcional 3
 \n* (cuadros) commit no funcional 4
+\n* (cuadros) commit no funcional 5
