@@ -8,7 +8,7 @@ Permite administrar clientes, citas, servicios y usuarios mediante una arquitect
 El sistema está compuesto por:
 
 - Frontend: HTML, CSS
-- Backend: Firebase Authentication 
+- Backend: Firebase Authenticationion 
 - Hosting en la nube con Firebase Hosting
 
 ---
@@ -36,7 +36,7 @@ Usuario
 ⬇  
 Frontend (HTML + CSS + JS)  
 ⬇  
-Firebase Authentication  
+Firebase Authenticationion  
 ⬇  
 Firebase Hosting  
 
@@ -49,7 +49,7 @@ Firebase Hosting
 - CSS
 
 ## Backend
-- Firebase Authenticat
+- Firebase Authentication
 - Firebase Hosting
 <img width="744" height="855" alt="image" src="https://github.com/user-attachments/assets/a9dbb415-e5c1-45bb-b299-883a15a3d4c1" />
 
