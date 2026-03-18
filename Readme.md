@@ -221,3 +221,6 @@ Juan David Cuadros Yeison David Moreno , Kevin Santiago Larrota, harold olivera.
 \n* Commit extra 3
 \n* Commit extra 4
 \n* Commit extra 5
+
+## Nota
+Texto de ejemplo: se añadieron cambios menores para commit extra.
