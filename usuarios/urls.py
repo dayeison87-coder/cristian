@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import ia_usuarios
 
 urlpatterns = [
 
@@ -17,6 +18,6 @@ urlpatterns = [
 
     # eliminar cita
     path('citas/<str:cita_id>/delete/', views.eliminar_cita),
-
+    path("ia/", ia_usuarios, name="ia_usuarios"),# IA
 ]
     

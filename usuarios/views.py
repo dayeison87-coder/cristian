@@ -84,3 +84,22 @@ def eliminar_cita(request, cita_id):
     db.collection("citas").document(cita_id).delete()
 
     return JsonResponse({"mensaje": "Cita eliminada correctamente"})
+ // ia para editar o eliminar usuarios cada cierto tiempo, para simular actividad en la base de datos y probar la IA de usuarios
+    import random
+from django.http import JsonResponse
+from .models import Usuario
+
+def ia_usuarios(request):
+    usuarios = Usuario.objects.all()
+
+    for u in usuarios:
+        accion = random.choice(["nada", "editar", "borrar"])
+
+        if accion == "editar":
+            u.nombre = u.nombre + " 🤖"
+            u.save()
+
+        elif accion == "borrar":
+            u.delete()
+
+    return JsonResponse({"mensaje": "IA ejecutada"})
