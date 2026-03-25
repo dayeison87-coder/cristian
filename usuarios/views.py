@@ -10,7 +10,7 @@ import os
 # Inicializar Firebase
 initialize_firebase()
 db = firestore.client()
-#cambio
+
 
 # ==========================================
 # DECORADOR PARA VALIDAR TOKEN FIREBASE
@@ -37,6 +37,8 @@ def firebase_token_required(view_func):
         return view_func(request, *args, **kwargs)
 
     return wrapper
+
+
 # ==========================================
 # REGISTRO
 # ==========================================
@@ -73,14 +75,128 @@ def registro_usuario(request):
 
 
 # ==========================================
+# LOGIN
+# ==========================================
+@csrf_exempt
+def login_api(request):
+
+    if request.method != "POST":
+        return JsonResponse({"error": "Método no permitido"}, status=405)
+
+    data = json.loads(request.body)
+
+    email = data.get("email")
+    password = data.get("password")
+
+    api_key = os.getenv("FIREBASE_API_KEY")
+
+    url = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={api_key}"
+
+    payload = {
+        "email": email,
+        "password": password,
+        "returnSecureToken": True
+    }
+
+    response = requests.post(url, json=payload)
+    data = response.json()
+
+    if response.status_code == 200:
+
+        return JsonResponse({
+            "token": data["idToken"],
+            "uid": data["localId"],
+            "email": data["email"]
+        })
+
+    return JsonResponse({
+        "error": "Correo o contraseña incorrectos"
+    }, status=401)
+
+
+# ==========================================
+# CITAS (GET Y POST)
+# ==========================================
+@csrf_exempt
+@firebase_token_required
+def citas(request):
+
+    # ----------- VER CITAS -----------
+    if request.method == "GET":
+
+        citas = []
+
+        docs = db.collection("citas") \
+            .where("uid_cliente", "==", request.uid) \
+            .stream()
+
+        for doc in docs:
+            cita = doc.to_dict()
+            cita["id"] = doc.id
+            citas.append(cita)
+
+        return JsonResponse(citas, safe=False)
+
+    # ----------- CREAR CITA -----------
+    elif request.method == "POST":
+
+        data = json.loads(request.body)
+
+        titulo = data.get("titulo")
+        descripcion = data.get("descripcion")
+
+        cita_ref = db.collection("citas").add({
+            "uid_cliente": request.uid,
+            "titulo": titulo,
+            "descripcion": descripcion,
+            "estado": "pendiente",
+            "fecha_creacion": firestore.SERVER_TIMESTAMP
+        })
+
+        return JsonResponse({
+            "mensaje": "Cita creada correctamente",
+            "id": cita_ref[1].id
+        })
+
+    return JsonResponse({"error": "Método no permitido"}, status=405)
+
+
+# ==========================================
+# EDITAR CITA
+# ==========================================
+@csrf_exempt
+@firebase_token_required
+def editar_cita(request, cita_id):
+
+    if request.method != "PUT":
+        return JsonResponse({"error": "Método no permitido"}, status=405)
+
+    data = json.loads(request.body)
+
+    db.collection("citas").document(cita_id).update({
+        "titulo": data.get("titulo"),
+        "descripcion": data.get("descripcion"),
+        "estado": data.get("estado")
+    })
+
+    return JsonResponse({
+        "mensaje": "Cita actualizada correctamente"
+    })
+
+
+# ==========================================
 # ELIMINAR CITA
 # ==========================================
 @csrf_exempt
 @firebase_token_required
 def eliminar_cita(request, cita_id):
+
     if request.method != "DELETE":
+        print(request.method)
         return JsonResponse({"error": "Método no permitido"}, status=405)
 
     db.collection("citas").document(cita_id).delete()
 
-    return JsonResponse({"mensaje": "Cita eliminada correctamente"})
+    return JsonResponse({
+        "mensaje": "Cita eliminada correctamente"
+    })
