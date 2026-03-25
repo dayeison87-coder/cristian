@@ -7,8 +7,8 @@ Permite administrar clientes, citas, servicios y usuarios mediante una arquitect
 
 El sistema está compuesto por:
 
-- Frontend: HTML, CSS y JavaScript
-- Backend: Firebase Authentication 
+- Frontend: HTML, CSS
+- Backend: Firebase Authenticationion 
 - Hosting en la nube con Firebase Hosting
 
 ---
@@ -36,7 +36,7 @@ Usuario
 ⬇  
 Frontend (HTML + CSS + JS)  
 ⬇  
-Firebase Authentication  
+Firebase Authenticationion  
 ⬇  
 Firebase Hosting  
 
@@ -47,10 +47,9 @@ Firebase Hosting
 ## Frontend
 - HTML
 - CSS
-- JavaScript 
 
 ## Backend
-- Firebase Authenticat
+- Firebase Authentication
 - Firebase Hosting
 <img width="744" height="855" alt="image" src="https://github.com/user-attachments/assets/a9dbb415-e5c1-45bb-b299-883a15a3d4c1" />
 
@@ -217,3 +216,15 @@ Juan David Cuadros Yeison David Moreno , Kevin Santiago Larrota, harold olivera.
 
 
 
+\n* Commit extra 1
+\n* Commit extra 2
+\n* Commit extra 3
+\n* Commit extra 4
+\n* Commit extra 5
+
+## Nota
+Texto de ejemplo: se añadieron cambios menores para commit extra.
+\n* (cuadros) commit no funcional 1
+\n* (cuadros) commit no funcional 2
+\n* (cuadros) commit no funcional 3
+\n* (cuadros) commit no funcional 4

@@ -10,7 +10,7 @@ import os
 # Inicializar Firebase
 initialize_firebase()
 db = firestore.client()
-#cambio
+
 
 # ==========================================
 # DECORADOR PARA VALIDAR TOKEN FIREBASE
@@ -37,6 +37,8 @@ def firebase_token_required(view_func):
         return view_func(request, *args, **kwargs)
 
     return wrapper
+
+
 # ==========================================
 # REGISTRO
 # ==========================================
@@ -70,6 +72,7 @@ def registro_usuario(request):
 
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
+
 
 # ==========================================
 # LOGIN
@@ -110,6 +113,7 @@ def login_api(request):
         "error": "Correo o contraseña incorrectos"
     }, status=401)
 
+
 # ==========================================
 # CITAS (GET Y POST)
 # ==========================================
@@ -132,8 +136,8 @@ def citas(request):
             citas.append(cita)
 
         return JsonResponse(citas, safe=False)
-    
-     # ----------- CREAR CITA -----------
+
+    # ----------- CREAR CITA -----------
     elif request.method == "POST":
 
         data = json.loads(request.body)
@@ -155,6 +159,7 @@ def citas(request):
         })
 
     return JsonResponse({"error": "Método no permitido"}, status=405)
+
 
 # ==========================================
 # EDITAR CITA
@@ -179,3 +184,19 @@ def editar_cita(request, cita_id):
     })
 
 
+# ==========================================
+# ELIMINAR CITA
+# ==========================================
+@csrf_exempt
+@firebase_token_required
+def eliminar_cita(request, cita_id):
+
+    if request.method != "DELETE":
+        print(request.method)
+        return JsonResponse({"error": "Método no permitido"}, status=405)
+
+    db.collection("citas").document(cita_id).delete()
+
+    return JsonResponse({
+        "mensaje": "Cita eliminada correctamente"
+    })
