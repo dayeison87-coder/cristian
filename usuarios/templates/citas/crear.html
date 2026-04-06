@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agendar Cita | Barbería Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+                        url("https://images.unsplash.com/photo-1503951914875-452162b0f3f1");
+            background-size: cover;
+            background-position: center;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: rgba(20, 20, 20, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            width: 420px;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #d4af37;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #f5d97e;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            border-radius: 8px;
+            border: none;
+            background: #2a2a2a;
+            color: white;
+            outline: none;
+        }
+
+        input:focus, select:focus {
+            border: 1px solid #d4af37;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 30px;
+            background: #d4af37;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #b8962e;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #d4af37;
+            text-decoration: none;
+        }
+
+        .messages {
+            margin-bottom: 15px;
+            text-align: center;
+            color: #ff6b6b;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>💈 Agendar Nueva Cita</h2>
+
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Servicio</label>
+        <select name="servicio" required>
+            <option value="">Selecciona un servicio</option>
+            <option value="Corte clásico">Corte clásico</option>
+            <option value="Fade">Fade</option>
+            <option value="Barba">Barba</option>
+            <option value="Corte + Barba">Corte + Barba</option>
+        </select>
+
+        <label>Fecha</label>
+        <input type="date" name="fecha" required>
+
+        <label>Hora</label>
+        <input type="time" name="hora" required>
+
+        <button type="submit">Confirmar Cita</button>
+    </form>
+
+    <a class="back" href="{% url 'listar_citas' %}">
+        ← Volver a mis citas
+    </a>
+</div>
+
+</body>
+</html>

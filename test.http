@@ -1,0 +1,63 @@
+### ==========================================
+### 1. REGISTRAR USUARIO
+### ==========================================
+POST http://127.0.0.1:8000/registro/
+Content-Type: application/json
+
+{
+  "email": "pepe5@gmail.com",
+  "password": "000000"
+}
+
+
+### ==========================================
+### 2. LOGIN (OBTENER TOKEN FIREBASE)
+### ==========================================
+POST http://127.0.0.1:8000/api/auth/login/
+Content-Type: application/json
+
+{
+  "email": "dayeison871@gmail.com",
+  "password": "123456"
+}
+
+
+### ==========================================
+### 3. CREAR CITA
+### ==========================================
+POST http://127.0.0.1:8000/citas/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjczMmNhOTY3MTNiMWRkMTcyMzg1MDg0Y2U5ZjQzODFhZDAwY2VjZTQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY3VhcnRvLXRyaW1lc3RyZS1jcmlzdGlhbiIsImF1ZCI6ImN1YXJ0by10cmltZXN0cmUtY3Jpc3RpYW4iLCJhdXRoX3RpbWUiOjE3NzM2ODAyNTEsInVzZXJfaWQiOiJqdHVoeEQ1NDI3V3BEakh6QzN5dUlNZWE1Mk0yIiwic3ViIjoianR1aHhENTQyN1dwRGpIekMzeXVJTWVhNTJNMiIsImlhdCI6MTc3MzY4MDI1MSwiZXhwIjoxNzczNjgzODUxLCJlbWFpbCI6ImRheWVpc29uODcxQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJkYXllaXNvbjg3MUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.PmlSlfNmRKxaFZLoFukFHc-3Mk-Z3vYGwgYpgeyLYVi_7zRX-JPQjt5E5gaaNawu8gXWWRmAGPqV9Rnprwd9uP8Nd4euR0IN_Kim9HDbGZr0eKxgarBmzdxafm-VzzsFhSlr2WAwGPGOCuaidwCGSbiinS912BIZCRWm4LiRNO0TD1fT5Pfe0CuIMOpRXd8hxE0B6xjFP3Oe8RVkEisaV4gIE-0y5BZqhFEkMSu6qVXHOEguXeRkDtVX_5qV2mPIaEBJElFnfZPBk8HWpdh54llDV1kwQzvnLmrYVfcFaxvhs-qnehS1nzY9RSBM2mDGF2tQnDVZ_rCiwvzCClWxBQ
+
+{
+  "titulo": "cita de barba azul",
+  "descripcion": "pasar una foto de la mama de pepe"
+}
+
+
+### ==========================================
+### 4. VER TODAS LAS CITAS
+### ==========================================
+GET http://127.0.0.1:8000/citas/
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjczMmNhOTY3MTNiMWRkMTcyMzg1MDg0Y2U5ZjQzODFhZDAwY2VjZTQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY3VhcnRvLXRyaW1lc3RyZS1jcmlzdGlhbiIsImF1ZCI6ImN1YXJ0by10cmltZXN0cmUtY3Jpc3RpYW4iLCJhdXRoX3RpbWUiOjE3NzM2NzQzMTEsInVzZXJfaWQiOiJBV2N2Vmc4TEZ2VWJpNGxvNnFIb0VjbENFMWcyIiwic3ViIjoiQVdjdlZnOExGdlViaTRsbzZxSG9FY2xDRTFnMiIsImlhdCI6MTc3MzY3NDMxMSwiZXhwIjoxNzczNjc3OTExLCJlbWFpbCI6InBlcGU1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJwZXBlNUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.HgRlmIdW_5oleli2Nl-DFk_AJA2rWnX2S8MYsVAVo6zltfVWa00qK_rsY76noe0Z4QoJdSIHlvzC6ryE8adKeRmMXPvGhKpte3ishPMDVigX9VBszyRl9mCHqiJDOS-3iOXSwlCvmzsoJ_10rHrA-jeVMGmNC8UxsDMat8Ww7GkveI21B8k3OUUVUw77tQrdTQ_5KZrR41F-8rwVEctR6qIEufKtao1VRlqnR3CIl3Roff4EeAhm2GzpFzCQSlIz-VsY_PvG_kMRSm4LinyiHA4ZUNoHFWbFQySoMMlVBxr4EVL9QkiMweyvRIZ3zN5TucPVBhIizTrBVD6IW5Phnw
+
+
+### ==========================================
+### 5. EDITAR CITA
+### ==========================================
+PUT http://127.0.0.1:8000/citas/WcNqQ8wkvY3JbLDshlFa/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjczMmNhOTY3MTNiMWRkMTcyMzg1MDg0Y2U5ZjQzODFhZDAwY2VjZTQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY3VhcnRvLXRyaW1lc3RyZS1jcmlzdGlhbiIsImF1ZCI6ImN1YXJ0by10cmltZXN0cmUtY3Jpc3RpYW4iLCJhdXRoX3RpbWUiOjE3NzM2NzQzMTEsInVzZXJfaWQiOiJBV2N2Vmc4TEZ2VWJpNGxvNnFIb0VjbENFMWcyIiwic3ViIjoiQVdjdlZnOExGdlViaTRsbzZxSG9FY2xDRTFnMiIsImlhdCI6MTc3MzY3NDMxMSwiZXhwIjoxNzczNjc3OTExLCJlbWFpbCI6InBlcGU1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJwZXBlNUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.HgRlmIdW_5oleli2Nl-DFk_AJA2rWnX2S8MYsVAVo6zltfVWa00qK_rsY76noe0Z4QoJdSIHlvzC6ryE8adKeRmMXPvGhKpte3ishPMDVigX9VBszyRl9mCHqiJDOS-3iOXSwlCvmzsoJ_10rHrA-jeVMGmNC8UxsDMat8Ww7GkveI21B8k3OUUVUw77tQrdTQ_5KZrR41F-8rwVEctR6qIEufKtao1VRlqnR3CIl3Roff4EeAhm2GzpFzCQSlIz-VsY_PvG_kMRSm4LinyiHA4ZUNoHFWbFQySoMMlVBxr4EVL9QkiMweyvRIZ3zN5TucPVBhIizTrBVD6IW5Phnw
+
+{
+  "titulo": "cita de barba azul editada",
+  "descripcion": "pasar una foto de la mama de pepe editada",
+  "estado": "En Progreso"
+}
+
+
+### ==========================================
+### 6. ELIMINAR CITA
+### ==========================================
+DELETE http://127.0.0.1:8000/citas/WcNqQ8wkvY3JbLDshlFa/delete/ 
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjczMmNhOTY3MTNiMWRkMTcyMzg1MDg0Y2U5ZjQzODFhZDAwY2VjZTQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY3VhcnRvLXRyaW1lc3RyZS1jcmlzdGlhbiIsImF1ZCI6ImN1YXJ0by10cmltZXN0cmUtY3Jpc3RpYW4iLCJhdXRoX3RpbWUiOjE3NzM2NzQzMTEsInVzZXJfaWQiOiJBV2N2Vmc4TEZ2VWJpNGxvNnFIb0VjbENFMWcyIiwic3ViIjoiQVdjdlZnOExGdlViaTRsbzZxSG9FY2xDRTFnMiIsImlhdCI6MTc3MzY3NDMxMSwiZXhwIjoxNzczNjc3OTExLCJlbWFpbCI6InBlcGU1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJwZXBlNUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.HgRlmIdW_5oleli2Nl-DFk_AJA2rWnX2S8MYsVAVo6zltfVWa00qK_rsY76noe0Z4QoJdSIHlvzC6ryE8adKeRmMXPvGhKpte3ishPMDVigX9VBszyRl9mCHqiJDOS-3iOXSwlCvmzsoJ_10rHrA-jeVMGmNC8UxsDMat8Ww7GkveI21B8k3OUUVUw77tQrdTQ_5KZrR41F-8rwVEctR6qIEufKtao1VRlqnR3CIl3Roff4EeAhm2GzpFzCQSlIz-VsY_PvG_kMRSm4LinyiHA4ZUNoHFWbFQySoMMlVBxr4EVL9QkiMweyvRIZ3zN5TucPVBhIizTrBVD6IW5Phnw
