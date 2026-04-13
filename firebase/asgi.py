@@ -1,16 +1,16 @@
-"""
-ASGI config for firebase project.
-
-It exposes the ASGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/6.0/howto/deployment/asgi/
-"""
-
 import os
-
 from django.core.asgi import get_asgi_application
+from channels.routing import ProtocolTypeRouter, URLRouter
+from channels.auth import AuthMiddlewareStack
+import usuarios.routing  # <--- Reemplaza 'usuarios' por el nombre real de tu app
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'firebase.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'firebase.settings') # <--- Tu nombre de proyecto
 
-application = get_asgi_application()
+application = ProtocolTypeRouter({
+    "http": get_asgi_application(),
+    "websocket": AuthMiddlewareStack(
+        URLRouter(
+            usuarios.routing.websocket_urlpatterns
+        )
+    ),
+})

@@ -7,6 +7,10 @@ import json
 import requests
 import os
 
+# WebSocket
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
+
 # Inicializar Firebase
 initialize_firebase()
 db = firestore.client()
@@ -153,9 +157,34 @@ def citas(request):
             "fecha_creacion": firestore.SERVER_TIMESTAMP
         })
 
+        cita_id = cita_ref[1].id
+
+        # 🔥 AGREGADO: Conteo para corte gratis CADA 3 citas
+        citas_query = db.collection("citas").where("uid_cliente", "==", request.uid).get()
+        total_citas = len(citas_query)
+
+        if total_citas % 3 == 0:
+            mensaje = f"🎉 ¡CORTE GRATIS! Cada 3 citas (total: {total_citas})"
+        else:
+            mensaje = f"Cita creada correctamente. Total: {total_citas}/3"
+
+        # 🔥 Notificar por WebSocket (tu código preservado)
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)(
+            "barbero",
+            {
+                "type": "nueva_cita",
+                "accion": "crear",
+                "id": cita_id,
+                "titulo": titulo,
+                "descripcion": descripcion
+            }
+        )
+
         return JsonResponse({
-            "mensaje": "Cita creada correctamente",
-            "id": cita_ref[1].id
+            "mensaje": mensaje,
+            "id": cita_id,
+            "total_citas": total_citas  # Para debug
         })
 
     return JsonResponse({"error": "Método no permitido"}, status=405)
@@ -179,6 +208,20 @@ def editar_cita(request, cita_id):
         "estado": data.get("estado")
     })
 
+    # 🔥 Notificar actualización
+    channel_layer = get_channel_layer()
+    async_to_sync(channel_layer.group_send)(
+        "barbero",
+        {
+            "type": "nueva_cita",
+            "accion": "editar",
+            "id": cita_id,
+            "titulo": data.get("titulo"),
+            "descripcion": data.get("descripcion"),
+            "estado": data.get("estado")
+        }
+    )
+
     return JsonResponse({
         "mensaje": "Cita actualizada correctamente"
     })
@@ -192,10 +235,20 @@ def editar_cita(request, cita_id):
 def eliminar_cita(request, cita_id):
 
     if request.method != "DELETE":
-        print(request.method)
         return JsonResponse({"error": "Método no permitido"}, status=405)
 
     db.collection("citas").document(cita_id).delete()
+
+    # 🔥 Notificar eliminación
+    channel_layer = get_channel_layer()
+    async_to_sync(channel_layer.group_send)(
+        "barbero",
+        {
+            "type": "nueva_cita",
+            "accion": "eliminar",
+            "id": cita_id
+        }
+    )
 
     return JsonResponse({
         "mensaje": "Cita eliminada correctamente"
